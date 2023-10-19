@@ -17,11 +17,11 @@ nome_livro varchar (60) not null,
 autor_livro varchar (50) not null,
 idioma_livro varchar (50) not null,
 data_lancamento_livro date,
-data_criacao_livro date
+data_criacao_livro date 
 );
 
 CREATE TABLE tb_idiomas(
-id_idioma varchar (50) auto_increment primary key not null,
+id_idioma int auto_increment primary key not null,
 abreviacao_idioma varchar (50) not null
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE tb_idioma_livros(
 id_livro int,
 id_idioma int,
 nome_livro varchar (60) not null,
-abreviacao_idioma varchar not null,
+abreviacao_idioma varchar(30) not null,
 foreign key (id_idioma) references tb_idiomas (id_idioma)
 );
 
