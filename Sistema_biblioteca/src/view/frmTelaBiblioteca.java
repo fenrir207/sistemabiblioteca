@@ -96,6 +96,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/alterar.png"))); // NOI18N
         btAlterar.setText("Alterar");
 
+
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPesquisarKeyTyped(evt);
@@ -136,6 +137,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                                 .addComponent(btCadastrar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                                 .addGap(254, 254, 254)))
                         .addGap(99, 99, 99)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +145,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                             .addComponent(btAutor, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(103, 103, 103))
+
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
