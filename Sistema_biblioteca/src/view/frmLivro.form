@@ -48,22 +48,20 @@
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jComboBox1" pref="565" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblData" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="txtAutor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNomeLivro" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="395" max="32767" attributes="0"/>
-                              <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="txtDataLancamento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblNomeLivro" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblAutor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblIdiomas" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblDataLancamento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtData" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtAutor" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNomeLivro" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="395" max="32767" attributes="0"/>
+                          <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="txtDataLancamento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblNomeLivro" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblAutor" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIdiomas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblDataLancamento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtData" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblData" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               </Group>
@@ -177,7 +175,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Microsoft YaHei UI Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Data :"/>
+            <Property name="text" type="java.lang.String" value="Data de Cadastro:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
