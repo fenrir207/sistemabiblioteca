@@ -1,8 +1,8 @@
-
 package model.dao;
 
 import connection.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Autor;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,20 +20,19 @@ import model.Autor;
 public class AutorDAO implements DAO {
 
     @Override
-    public void insert() throws SQLException{
+    public void insert() throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            Autor cliente = new Autor();
-            stmt = con.prepareStatement("INSERT INTO tb_usuario (nome,endereco,cpf,telefone,email)VALUES(?,?,?,?,?)");
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getEndereco());
-            stmt.setString(3, cliente.getCpf());
-            stmt.setString(4, cliente.getTelefone());
-            stmt.setString(5, cliente.getEmail());
+            Autor autor = new Autor();
+            stmt = con.prepareStatement("INSERT INTO tb_autores (nome_autor,pais_autor,livros_autor,data_criacao)VALUES(?,?,?,?)");
+            stmt.setString(1, autor.getNome());
+            stmt.setString(2, autor.getPais());
+            stmt.setString(3, autor.getLivros().toString());
+            stmt.setDate(4, Date.valueOf(autor.getData_criacao()));
 
             stmt.executeUpdate();
 
@@ -46,30 +46,29 @@ public class AutorDAO implements DAO {
     }
 
     @Override
-    public ArrayList readAll() throws SQLException{
+    public ArrayList readAll() throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        ArrayList<Autor> clientes = new ArrayList<>();
+        ArrayList<Autor> listaAutor = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente");
+            stmt = con.prepareStatement("SELECT * FROM tb_autores");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Autor c = new Autor();
+                Autor a = new Autor();
 
-                c.setId(rs.getInt("id_usuario"));
-                c.setNome(rs.getString("nome"));
-                c.setEndereco(rs.getString("endereco"));
-                c.setCpf(rs.getString("cpf"));
-                c.setTelefone(rs.getString("telefone"));
-                c.setEmail(rs.getString("email"));
-                clientes.add(c);
+                a.setId(rs.getInt("id_autor"));
+                a.setNome(rs.getString("nome_autor"));
+                a.setPais(rs.getString("pais_autor"));
+                a.setLivros(rs.getString("livros_autor"));
+                a.setData_criacao(rs.getDate("data_criacao_autor").toLocalDate());
+                listaAutor.add(a);
             }
 
         } catch (SQLException ex) {
@@ -78,37 +77,36 @@ public class AutorDAO implements DAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
 
-        return clientes;
+        return listaAutor;
 
     }
 
     @Override
-    public ArrayList search(String desc) throws SQLException{
+    public ArrayList search(String desc) throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        ArrayList<Autor> clientes = new ArrayList<>();
+        ArrayList<Autor> listaAutor = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_usuario WHERE nome LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tb_autores WHERE nome LIKE ?");
             stmt.setString(1, "%" + desc + "%");
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Autor c = new Autor();
+                Autor a = new Autor();
 
-                c.setId(rs.getInt("id_usuario"));
-                c.setNome(rs.getString("nome"));
-                c.setEndereco(rs.getString("endereco"));
-                c.setCpf(rs.getString("cpf"));
-                c.setTelefone(rs.getString("telefone"));
-                c.setEmail(rs.getString("email"));
-                clientes.add(c);
+                a.setId(rs.getInt("id_autor"));
+                a.setNome(rs.getString("nome_autor"));
+                a.setPais(rs.getString("pais_autor"));
+                a.setLivros(rs.getString("livros_autor"));
+                a.setData_criacao(rs.getDate("data_criacao_autor").toLocalDate());
+                listaAutor.add(a);
             }
 
         } catch (SQLException ex) {
@@ -117,36 +115,31 @@ public class AutorDAO implements DAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
 
-        return clientes;
+        return listaAutor;
 
     }
-    
+
     @Override
-    public void update() throws SQLException{
+    public void update() throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
         //tentativa do comando UPDATE
         try {
-            Autor cliente = new Autor();
-            stmt = con.prepareStatement("UPDATE tb_usuario SET nome = ? ,endereco = ? ,cpf = ? ,telefone = ? ,email = ? WHERE id_cliente = ?");
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getEndereco());
-            stmt.setString(3, cliente.getCpf());
-            stmt.setString(4, cliente.getTelefone());
-            stmt.setString(5, cliente.getEmail());
-            stmt.setInt(6, cliente.getId());
-
+            Autor autor = new Autor();
+            stmt = con.prepareStatement("UPDATE tb_autores SET nome_autor = ? ,pais_autor = ? ,livros_autor = ?,data_criacao_autor = ? WHERE id_autor = ?");
+            stmt.setString(1, autor.getNome());
+            stmt.setString(2, autor.getPais());
+            stmt.setString(3, autor.getLivros());
+            stmt.setDate(4, Date.valueOf(LocalDate.now()));
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-        } 
-        //tratamento de exceção SQL
+        } //tratamento de exceção SQL
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
-        }
-        //finalmente fecha a conexao com o banco
+        } //finalmente fecha a conexao com o banco
         finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -154,16 +147,16 @@ public class AutorDAO implements DAO {
     }
 
     @Override
-    public void delete(String where) throws SQLException{
+    public void delete(String where) throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            Autor cliente = new Autor();
-            stmt = con.prepareStatement("DELETE FROM tb_usuario WHERE id = ?");
-            stmt.setInt(1, cliente.getId());
+            Autor autor = new Autor();
+            stmt = con.prepareStatement("DELETE FROM tb_autores WHERE id = ?");
+            stmt.setInt(1, autor.getId());
 
             stmt.executeUpdate();
 

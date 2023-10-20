@@ -78,7 +78,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         btAlterar.setText("Alterar");
 
         btExcluir.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
-        btExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Documents\\lixo (1).png")); // NOI18N
         btExcluir.setText("Excluir");
         btExcluir.setToolTipText("");
 
@@ -124,7 +123,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 27, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblPesquisar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))

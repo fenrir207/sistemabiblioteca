@@ -16,7 +16,7 @@ public class Autor {
     private int id;
     private String nome;
     private String pais;
-    private List livros;
+    private String livros;
     private LocalDate data_criacao;
 
     private ArrayList<AutorTableModel> Autor;
@@ -48,11 +48,11 @@ public class Autor {
         this.pais = pais;
     }
 
-    public List getLivros() {
+    public String getLivros() {
         return livros;
     }
 
-    public void setLivros(List livros) {
+    public void setLivros(String livros) {
         this.livros = livros;
     }
 

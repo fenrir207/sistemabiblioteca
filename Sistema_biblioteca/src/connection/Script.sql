@@ -12,7 +12,7 @@ data_criacao date
 
 CREATE TABLE tb_livros(
 id_livro int not null auto_increment primary key,
-isbn_livro int,
+isbn_livro varchar(20) not null,
 nome_livro varchar (60) not null,
 autor_livro varchar (50) not null,
 idioma_livro varchar (50) not null,
