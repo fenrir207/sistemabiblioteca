@@ -33,16 +33,18 @@ public class frmLivro extends javax.swing.JFrame {
         txtNomeLivro = new javax.swing.JTextField();
         lblAutor = new javax.swing.JLabel();
         txtAutor = new javax.swing.JTextField();
-        lblLinguas = new javax.swing.JLabel();
-        txtLinguas = new javax.swing.JTextField();
+        lblIdiomas = new javax.swing.JLabel();
         lblDataLancamento = new javax.swing.JLabel();
         txtDataLancamento = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         txtData = new javax.swing.JTextField();
         lblData = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -54,8 +56,8 @@ public class frmLivro extends javax.swing.JFrame {
         lblAutor.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblAutor.setText("Autor:");
 
-        lblLinguas.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        lblLinguas.setText("Línguas:");
+        lblIdiomas.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        lblIdiomas.setText("Idiomas:");
 
         lblDataLancamento.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblDataLancamento.setText("Data Lançamento:");
@@ -65,6 +67,11 @@ public class frmLivro extends javax.swing.JFrame {
 
         btnVoltar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         lblData.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblData.setText("Data :");
@@ -76,21 +83,22 @@ public class frmLivro extends javax.swing.JFrame {
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLinguas)
-                    .addComponent(txtAutor)
-                    .addComponent(txtNomeLivro)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar))
-                    .addComponent(txtDataLancamento)
-                    .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblLinguas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblDataLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtData))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jComboBox1, 0, 565, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAutor)
+                        .addComponent(txtNomeLivro)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(btnVoltar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                            .addComponent(btnCadastrar))
+                        .addComponent(txtDataLancamento)
+                        .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblIdiomas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDataLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtData)))
                 .addGap(60, 60, 60))
         );
         jPanel3Layout.setVerticalGroup(
@@ -106,9 +114,9 @@ public class frmLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLinguas)
+                .addComponent(lblIdiomas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtLinguas, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDataLancamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,6 +145,13 @@ public class frmLivro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
+        frmTelaBiblioteca.setLocationRelativeTo(this);
+        frmTelaBiblioteca.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,41 +191,17 @@ public class frmLivro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDataLancamento;
-    private javax.swing.JLabel lblLinguas;
+    private javax.swing.JLabel lblIdiomas;
     private javax.swing.JLabel lblNomeLivro;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDataLancamento;
-    private javax.swing.JTextField txtLinguas;
     private javax.swing.JTextField txtNomeLivro;
     // End of variables declaration//GEN-END:variables
 }

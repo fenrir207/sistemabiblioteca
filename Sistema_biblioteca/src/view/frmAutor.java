@@ -41,6 +41,8 @@ public class frmAutor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         lblCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCadastrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCadastrar.setText("Cadastrar Autor");
@@ -62,6 +64,11 @@ public class frmAutor extends javax.swing.JFrame {
 
         btVoltar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,6 +132,13 @@ public class frmAutor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
+        frmTelaBiblioteca.setLocationRelativeTo(this);
+        frmTelaBiblioteca.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
