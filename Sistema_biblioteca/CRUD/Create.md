@@ -5,9 +5,13 @@
 **DOCUMENTAÇÃO DE IMPLEMENTAÇÃO DE TESTES**
 Grupo: 3
 
+**////////////////////////////////////////////////////////**
+
 **Teste de cadastro do autor**
 
 *Cadastrar autor:*
+
+**////////////////////////////////////////////////////////**
 
 
 **Teste 1**
@@ -31,6 +35,7 @@ Livros: O Pequeno Principe
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 2**
 
@@ -51,6 +56,7 @@ Livros: O Pequeno Principe
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 3**
 
@@ -74,6 +80,8 @@ Livros: O Pequeno Principe
 *Validação do teste:*
 
 
+**////////////////////////////////////////////////////////**
+
 **Teste 4**
 
 
@@ -93,6 +101,7 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Erro, dados incorretos!*
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 5**
 
@@ -115,7 +124,7 @@ Livros: O Pequeno Principe
 
 *Validação do teste:*
 
-
+**////////////////////////////////////////////////////////**
 
 **Teste 6**
 
@@ -138,6 +147,7 @@ Livros: O Pequeno Principe
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 7**
 
@@ -159,27 +169,7 @@ Livros:(vazio)
 
 *Validação do teste:*
 
-
-**Teste 8**
-
-
-*Entrada de dados:*
-
-Nome: Murilo
-
-
-País: Brasil
-
-
-ID: auto increment
-
-
-Livros:(vazio)
-
-**Resultado esperado:** *Erro, dados incorretos!*
-
-
-*Validação do teste:*
+**////////////////////////////////////////////////////////**
 
 **Teste 9**
 
@@ -202,6 +192,7 @@ Livros: 1212
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 9**
 
@@ -231,6 +222,7 @@ Livros:!@*!#!
 **Teste de cadastro do livro**
 *Cadastrar livro:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 1**
 
@@ -258,6 +250,7 @@ Isbn: 1234567890000
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 2**
 
@@ -282,6 +275,7 @@ Isbn: 1234567890000
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 3**
 
@@ -306,6 +300,7 @@ Isbn: 1234567890000
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 4**
 
@@ -333,6 +328,7 @@ Isbn: 1234567890000
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 5**
 
@@ -360,6 +356,7 @@ Isbn: 1234567890000
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 6**
 
@@ -387,6 +384,7 @@ Isbn: 1234567890l
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
 
 **Teste 7**
 
@@ -414,3 +412,4 @@ Isbn: 123456bhj
 
 *Validação do teste:*
 
+**////////////////////////////////////////////////////////**
