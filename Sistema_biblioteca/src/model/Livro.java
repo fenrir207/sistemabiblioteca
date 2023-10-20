@@ -18,21 +18,28 @@ public class Livro {
     private int id;
     private String isbn;
     private String nome;
-    private List autor;
-    private List idioma;
+    private String autor;
+    private String idioma;
     private LocalDate data_lancamento;
     private LocalDate data_criacao;
     
     private ArrayList<LivroTableModel> livros;
 
-    public List getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(List autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
     
     public int getId() {
         return id;
@@ -64,14 +71,6 @@ public class Livro {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public List getIdioma() {
-        return idioma;
-    }
-
-    public void setIdioma(List idioma) {
-        this.idioma = idioma;
     }
 
     public LocalDate getData_lancamento() {

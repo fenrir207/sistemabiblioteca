@@ -30,26 +30,20 @@ public class LivroDAO implements DAO {
     @Override
     public void insert() throws SQLException{
         
-        LocalDate date;
-        
-        
-        
-
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
             Livro livro = new Livro();
-            Date nahnha = Date.valueOf(livro.getData_lancamento());
-            stmt = con.prepareStatement("INSERT INTO tb_livros (isbn_livro ,nome_livro ,autor_livro ,idioma_livro ,)VALUES(?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_livros (isbn_livro ,nome_livro ,autor_livro ,idioma_livro ,data_lancamento_livro ,data_criacao_livro)VALUES(?,?,?,?,?,?)");
             stmt.setString(1, livro.getISBN());
             stmt.setString(2, livro.getNome());
-            stmt.setString(3, livro.getAutor().toString());
-            stmt.setString(4, livro.getIdioma().toString());
-            stmt.setDate(5, nahnha);
+            stmt.setString(3, livro.getAutor());
+            stmt.setString(4, livro.getIdioma());
+            stmt.setDate(5,Date.valueOf(livro.getData_lancamento()));
+            stmt.setDate(6, Date.valueOf(LocalDate.now()));
             
-
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -71,7 +65,7 @@ public class LivroDAO implements DAO {
 
         ResultSet rs = null;
         //instancia novo arraylist
-        ArrayList<Livro> carros = new ArrayList<>();
+        ArrayList<Livro> livros = new ArrayList<>();
         //tentativa do comando read
         try {
             stmt = con.prepareStatement("SELECT * FROM tb_veiculo");
@@ -80,26 +74,33 @@ public class LivroDAO implements DAO {
             while (rs.next()) {
 
                 Livro c = new Livro();
+                
+                
+     
 
-                c.setId(rs.getInt("id_veiculo"));
-                c.setPlaca(rs.getString("placa"));
-                c.setModelo(rs.getString("modelo"));
+                c.setId(rs.getInt("id_livro"));
+                c.setISBN(rs.getString("isbn_livro"));
+                c.setNome(rs.getString("nome_livro"));
+                c.setAutor(rs.getString("autor_livro"));
+                c.setIdioma(rs.getString("idioma_livro"));
+                c.setData_lancamento(rs.getDate("data_lancamento_livro").toLocalDate());
+                c.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
 
-                carros.add(c);
+                livros.add(c);
             }
 
-        } //tratamento de exceção //tratamento de exceção
+        } //tratamento de exceção 
         catch (SQLException ex) {
             Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } //finalmente fecha a conexao com o banco //finalmente fecha a conexao com o banco
+        } //finalmente fecha a conexao com o banco 
         finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         //retorna array list
-        return carros;
+        return livros;
 
     }
-// CRUD readfordesc (pesquisar)
+// CRUD search (pesquisar)
 
     @Override
     public ArrayList<Livro> search(String desc) throws SQLException {
@@ -109,14 +110,12 @@ public class LivroDAO implements DAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         // instancia novo ArrayList 
-        ArrayList<Livro> carros = new ArrayList<>();
+        ArrayList<Livro> livros = new ArrayList<>();
         //tentativa do comando readForDesc
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_veiculo WHERE ? LIKE ?");
-            //fazer um if-else com os radio buttons para filtrar o conteúdo!!!
-            stmt.setString(1, "%" + desc + "%");
+            stmt = con.prepareStatement("SELECT * FROM tb_livros WHERE nome_livro LIKE ?");
             //objeto(palavra/frase) da pesquisa
-            stmt.setString(2, "%" + desc + "%");
+            stmt.setString(1, "%" + desc + "%");
 
             rs = stmt.executeQuery();
 
@@ -124,11 +123,14 @@ public class LivroDAO implements DAO {
 
                 Livro c = new Livro();
 
-                c.setId(rs.getInt("id_veiculo"));
-                c.setPlaca(rs.getString("placa"));
-                c.setModelo(rs.getString("modelo"));
-                c.setCor(rs.getString("cor"));
-                carros.add(c);
+                c.setId(rs.getInt("id_livro"));
+                c.setISBN(rs.getString("isbn_livro"));
+                c.setNome(rs.getString("nome_livro"));
+                c.setAutor(rs.getString("autor_livro"));
+                c.setIdioma(rs.getString("idioma_livro"));
+                c.setData_lancamento(rs.getDate("data_lancamento_livro").toLocalDate());
+                c.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
+                livros.add(c);
             }
             //tratamento de exceção
         } catch (SQLException ex) {
@@ -138,7 +140,7 @@ public class LivroDAO implements DAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         //retorna o array list
-        return carros;
+        return livros;
 
     }
 
@@ -151,12 +153,17 @@ public class LivroDAO implements DAO {
         PreparedStatement stmt = null;
         //tentativa do comando update
         try {
-            Livro carro = new Livro();
-            stmt = con.prepareStatement("UPDATE tb_veiculo SET placa = ? ,modelo = ?,cor = ? WHERE id_carro = ?");
-            stmt.setString(1, carro.getPlaca());
-            stmt.setString(2, carro.getModelo());
-            stmt.setString(3, carro.getCor());
-            stmt.setInt(4, carro.getId());
+            Livro c = new Livro();
+            stmt = con.prepareStatement("UPDATE tb_livros SET isbn_livro = ? ,nome_livro = ? ,autor_livro = ? ,"
+                    + "idioma_livro = ? ,data_lancamento_livro = ? ,data_criacao_livro = ? WHERE id_carro = ?");
+            
+            stmt.setString(1, c.getISBN());
+            stmt.setString(2, c.getNome());
+            stmt.setString(3, c.getAutor());
+            stmt.setString(4, c.getIdioma());
+            stmt.setDate(5, Date.valueOf(c.getData_lancamento()));
+            stmt.setDate(6, Date.valueOf(LocalDate.now()));
+            stmt.setInt(7, c.getId());
 
             stmt.executeUpdate();
 
@@ -180,9 +187,9 @@ public class LivroDAO implements DAO {
         PreparedStatement stmt = null;
         //tentativa de executar o comando
         try {
-            Livro carro = new Livro();
-            stmt = con.prepareStatement("DELETE FROM tb_veiculo WHERE id_veiculo = ?");
-            stmt.setInt(1, carro.getId());
+            Livro livro = new Livro();
+            stmt = con.prepareStatement("DELETE FROM tb_livros WHERE id_livro = ?");
+            stmt.setInt(1, livro.getId());
 
             stmt.executeUpdate();
 
