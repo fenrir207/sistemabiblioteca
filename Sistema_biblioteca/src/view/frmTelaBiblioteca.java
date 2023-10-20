@@ -96,6 +96,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         lblBiblioteca.setText("BIBLIOTECA VIRTUAL");
 
         cbBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livros", "Autores" }));
+        cbBiblioteca.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

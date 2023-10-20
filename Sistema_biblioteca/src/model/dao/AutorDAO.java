@@ -20,19 +20,17 @@ import java.time.LocalDate;
 public class AutorDAO implements DAO {
 
     @Override
-    public void insert() throws SQLException {
-
+    public void insert(Object o) throws SQLException {
+        Autor autor = (Autor) o;
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            Autor autor = new Autor();
-            stmt = con.prepareStatement("INSERT INTO tb_autores (nome_autor,pais_autor,livros_autor,data_criacao)VALUES(?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_autores (nome_autor,pais_autor,data_criacao)VALUES(?,?,?)");
             stmt.setString(1, autor.getNome());
             stmt.setString(2, autor.getPais());
-            stmt.setString(3, autor.getLivros().toString());
-            stmt.setDate(4, Date.valueOf(autor.getData_criacao()));
+            stmt.setString(3, autor.getDataCriacao().toString());
 
             stmt.executeUpdate();
 
@@ -67,7 +65,7 @@ public class AutorDAO implements DAO {
                 a.setNome(rs.getString("nome_autor"));
                 a.setPais(rs.getString("pais_autor"));
                 a.setLivros(rs.getString("livros_autor"));
-                a.setData_criacao(rs.getDate("data_criacao_autor").toLocalDate());
+                a.setDataCriacao(rs.getDate("data_criacao_autor").toLocalDate());
                 listaAutor.add(a);
             }
 
@@ -105,7 +103,7 @@ public class AutorDAO implements DAO {
                 a.setNome(rs.getString("nome_autor"));
                 a.setPais(rs.getString("pais_autor"));
                 a.setLivros(rs.getString("livros_autor"));
-                a.setData_criacao(rs.getDate("data_criacao_autor").toLocalDate());
+                a.setDataCriacao(rs.getDate("data_criacao_autor").toLocalDate());
                 listaAutor.add(a);
             }
 
@@ -120,14 +118,14 @@ public class AutorDAO implements DAO {
     }
 
     @Override
-    public void update() throws SQLException {
-
+    public void update(Object o) throws SQLException {
+        Autor autor = (Autor) o;
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
         //tentativa do comando UPDATE
         try {
-            Autor autor = new Autor();
+
             stmt = con.prepareStatement("UPDATE tb_autores SET nome_autor = ? ,pais_autor = ? ,livros_autor = ?,data_criacao_autor = ? WHERE id_autor = ?");
             stmt.setString(1, autor.getNome());
             stmt.setString(2, autor.getPais());

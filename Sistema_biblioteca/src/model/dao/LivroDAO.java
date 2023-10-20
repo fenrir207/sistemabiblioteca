@@ -28,7 +28,7 @@ public class LivroDAO implements DAO {
 // CRUD create (criar)/insert(inserir)
 
     @Override
-    public void insert() throws SQLException{
+    public void insert(Object o) throws SQLException{
         
         Connection con = ConnectionFactory.getConnection();
 
@@ -146,7 +146,7 @@ public class LivroDAO implements DAO {
 
     //CRUD update (atualizar) 
     @Override
-    public void update() throws SQLException{
+    public void update(Object o) throws SQLException{
         //instancia a conexao com o banco de dados
         Connection con = ConnectionFactory.getConnection();
         //instancia os argumentos do banco de dados

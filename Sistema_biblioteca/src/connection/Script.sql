@@ -6,18 +6,18 @@ CREATE TABLE tb_autores(
 id_autor int not null auto_increment primary key,
 nome_autor varchar (50) not null,
 pais_autor varchar (40) not null,
-livros_autor varchar (50) not null,
-data_criacao date
+data_criacao date not null
 );
 
 CREATE TABLE tb_livros(
 id_livro int not null auto_increment primary key,
+id_autor int not null,
 isbn_livro varchar(20) not null,
 nome_livro varchar (60) not null,
-autor_livro varchar (50) not null,
 idioma_livro varchar (50) not null,
 data_lancamento_livro date,
-data_criacao_livro date 
+data_criacao_livro date,
+constraint fk_livro_autor foreign key (id_autor) references tb_autores(id_autor)
 );
 
 CREATE TABLE tb_idiomas(

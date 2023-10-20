@@ -17,7 +17,7 @@ public class Autor {
     private String nome;
     private String pais;
     private String livros;
-    private LocalDate data_criacao;
+    private LocalDate dataCriacao;
 
     private ArrayList<AutorTableModel> Autor;
 
@@ -56,12 +56,12 @@ public class Autor {
         this.livros = livros;
     }
 
-    public LocalDate getData_criacao() {
-        return data_criacao;
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setData_criacao(LocalDate data_criacao) {
-        this.data_criacao = data_criacao;
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public ArrayList<AutorTableModel> getAutor() {

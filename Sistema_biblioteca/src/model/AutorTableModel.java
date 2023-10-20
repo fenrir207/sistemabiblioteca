@@ -43,7 +43,7 @@ public class AutorTableModel extends AbstractTableModel {
             case 2:
                 return autor.getLivros();
             case 3:
-                return autor.getData_criacao();
+                return autor.getDataCriacao();
         }
         return autor;
     }

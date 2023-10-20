@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public interface DAO {
     //metodo adicionar/inserir
 
-    public void insert() throws SQLException;
+    public void insert(Object o) throws SQLException;
 
     // metdodo editar/atualizar
-    public void update() throws SQLException;
+    public void update(Object o) throws SQLException;
 
     // metodo excluir/deletar
     public void delete(String where) throws SQLException;
