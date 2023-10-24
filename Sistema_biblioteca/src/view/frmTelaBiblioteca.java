@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aluno
@@ -33,14 +35,16 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         btAutor = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
-        btExcluir = new javax.swing.JButton();
         txtPesquisar = new javax.swing.JTextField();
         lblPesquisar = new javax.swing.JLabel();
         lblBiblioteca = new javax.swing.JLabel();
         cbBiblioteca = new javax.swing.JComboBox<>();
+        btExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Biblioteca Vitual");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setToolTipText("");
 
         tblTabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -48,7 +52,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Autor", "Linguas", "Data de lançamento", "Data"
+                "Código", "Nome", "Autor", "Idioma", "Data de Lançamento", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -61,26 +65,37 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTabela);
 
-        btCadastrar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
-        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/abra-o-livro.png"))); // NOI18N
+        btCadastrar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/abra-o-livro.png"))); // NOI18N
         btCadastrar.setText("Cadastrar Livro");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         btAutor.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
-        btAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/homem-usuario.png"))); // NOI18N
+        btAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/homem-usuario.png"))); // NOI18N
         btAutor.setText("Cadastrar Autor");
+        btAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAutorActionPerformed(evt);
+            }
+        });
 
         btSair.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
-        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons8-sair-20.png"))); // NOI18N
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/icons8-sair-20.png"))); // NOI18N
         btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         btAlterar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/alterar.png"))); // NOI18N
+        btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/alterar.png"))); // NOI18N
         btAlterar.setText("Alterar");
 
-        btExcluir.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
-        btExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Documents\\lixo (1).png")); // NOI18N
-        btExcluir.setText("Excluir");
-        btExcluir.setToolTipText("");
 
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -89,7 +104,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         });
 
         lblPesquisar.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
-        lblPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons8-pesquisar-20.png"))); // NOI18N
+        lblPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icons/icons8-pesquisar.gif"))); // NOI18N
         lblPesquisar.setText("Pesquisar:");
 
         lblBiblioteca.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
@@ -97,6 +112,10 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         lblBiblioteca.setText("BIBLIOTECA VIRTUAL");
 
         cbBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livros", "Autores" }));
+        cbBiblioteca.setToolTipText("");
+
+        btExcluir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        btExcluir.setText("X Excluir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,36 +123,36 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblBiblioteca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btSair)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAlterar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btCadastrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAutor)
-                        .addGap(64, 64, 64))
+                .addGap(103, 103, 103)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPesquisar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btSair)
+                                .addGap(85, 85, 85)
+                                .addComponent(btExcluir)
+                                .addGap(18, 18, 18)
+                                .addComponent(btAlterar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btCadastrar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblPesquisar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+
+                                .addGap(254, 254, 254)))
+                        .addGap(99, 99, 99)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbBiblioteca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btAutor, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(103, 103, 103))
+
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(lblBiblioteca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -142,14 +161,13 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btAutor)
-                        .addComponent(btCadastrar)
-                        .addComponent(btExcluir)
-                        .addComponent(btAlterar))
-                    .addComponent(btSair))
-                .addGap(20, 20, 20))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSair)
+                    .addComponent(btAlterar)
+                    .addComponent(btCadastrar)
+                    .addComponent(btAutor)
+                    .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,7 +178,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -169,6 +187,27 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     private void txtPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisarKeyTyped
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+     frmLivro frmLivro = new frmLivro();
+        frmLivro.setLocationRelativeTo(this);
+        frmLivro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void btAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAutorActionPerformed
+        frmAutor frmAutor = new frmAutor();
+        frmAutor.setLocationRelativeTo(this);
+        frmAutor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btAutorActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+         int escolha = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (escolha == 0) {
+            frmTelaBiblioteca.this.dispose();
+        }
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +239,9 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmTelaBiblioteca().setVisible(true);
+                   frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
+                frmTelaBiblioteca.setLocationRelativeTo(frmTelaBiblioteca);
+                frmTelaBiblioteca.setVisible(true);
             }
         });
     
