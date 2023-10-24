@@ -33,7 +33,7 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Autor cadastrado!*
 
 
-*Validação do teste:*
+*Validação do teste: teste feito com sucesso, e o autor foi cadastrado.* 
 
 **////////////////////////////////////////////////////////**
 
@@ -54,7 +54,7 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Erro, dados incorretos!*
 
 
-*Validação do teste:*
+*Validação do teste: O teste foi concluído com sucesso, o autor não foi aceito utilizando um valor nulo.*
 
 **////////////////////////////////////////////////////////**
 
@@ -77,7 +77,7 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Erro, dados incorretos!*
 
 
-*Validação do teste:*
+*Validação do teste: O autor foi cadastrado mesmo com os dados incorretos, utilizando números*
 
 
 **////////////////////////////////////////////////////////**
@@ -99,7 +99,8 @@ ID: auto increment
 Livros: O Pequeno Principe
 
 **Resultado esperado:** *Erro, dados incorretos!*
-*Validação do teste:*
+
+*Validação do teste: Teste concluído, o autor foi cadastrado mesmo com o campo do país usando números e caracter especial*
 
 **////////////////////////////////////////////////////////**
 
@@ -122,7 +123,7 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Erro, dados incorretos!*
 
 
-*Validação do teste:*
+*Validação do teste: O país do autor não foi cadastrado, teste correto*
 
 **////////////////////////////////////////////////////////**
 
@@ -145,9 +146,12 @@ Livros: O Pequeno Principe
 **Resultado esperado:** *Erro, dados incorretos!*
 
 
-*Validação do teste:*
+*Validação do teste: O autor foi cadastrado mesmo com dados incorretos.*
 
 **////////////////////////////////////////////////////////**
+
+***Teste dos livros***
+
 
 **Teste 7**
 
