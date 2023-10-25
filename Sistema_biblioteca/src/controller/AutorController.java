@@ -4,21 +4,36 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Autor;
+import model.AutorTableModel;
 import model.dao.AutorDAO;
 import view.frmAutor;
+import view.frmTelaBiblioteca;
 
 
 public class AutorController {
     private frmAutor vAutor;
+    private frmTelaBiblioteca vBiblioteca;
     private AutorDAO dao;
+    private ArrayList<Autor> listaAutor;
     
     public AutorController(frmAutor vAutor){
         this.vAutor = vAutor;
         dao = new AutorDAO();
+    }
+    
+    public AutorController(frmTelaBiblioteca vBiblioteca){
+        this.vBiblioteca = vBiblioteca;
+        dao = new AutorDAO();
+        try {
+            listaAutor = dao.readAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void insert(){
@@ -38,6 +53,20 @@ public class AutorController {
                 Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void getTableAutor() throws SQLException{
+        listaAutor = dao.readAll();
+        AutorTableModel aModel = new AutorTableModel(listaAutor);
+        
+        for (int i = 0; i < aModel.getColumnCount(); i++) {
+            vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(aModel.getColumnName(i));
+        }
+        
+        for (Autor autor : listaAutor) {
+            aModel.addRow(autor);
+        }
+        vBiblioteca.getTblTabela().setModel(aModel);
     }
     
     public boolean verificarCampoVazio(String nome, String pais){
