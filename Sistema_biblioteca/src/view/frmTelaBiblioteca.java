@@ -4,19 +4,29 @@
  */
 package view;
 
+import controller.AutorController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author Aluno
  */
 public class frmTelaBiblioteca extends javax.swing.JFrame {
-
+    AutorController aController;
     /**
      * Creates new form frmTelaBiblioteca
      */
     public frmTelaBiblioteca() {
         initComponents();
+        aController = new AutorController(this);
+    }
+    
+    public JTable getTblTabela(){
+        return tblTabela;
     }
 
     /**
@@ -109,6 +119,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
         cbBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livros", "Autores" }));
         cbBiblioteca.setToolTipText("");
+        cbBiblioteca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBibliotecaActionPerformed(evt);
+            }
+        });
 
         btExcluir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
         btExcluir.setText("Excluir");
@@ -214,6 +229,18 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             frmTelaBiblioteca.this.dispose();
         }
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void cbBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBibliotecaActionPerformed
+        if (cbBiblioteca.getSelectedIndex() == 0) {
+            
+        }else{
+            try {
+                aController.getTableAutor();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cbBibliotecaActionPerformed
 
     /**
      * @param args the command line arguments
