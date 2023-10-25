@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
 public class AutorTableModel extends AbstractTableModel {
 
     private final String[] colunas = {
-        "Nome", "País", "Data de Criação"
+        "ID","Nome", "País", "Data de Criação"
     };
     private final ArrayList<Autor> autores;
 
@@ -49,10 +49,12 @@ public class AutorTableModel extends AbstractTableModel {
         Autor autor = autores.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return autor.getNome();
+                return autor.getId();
             case 1:
-                return autor.getPais();
+                return autor.getNome();
             case 2:
+                return autor.getPais();
+            case 3:
                 return autor.getDataCriacao();
         }
         return autor;

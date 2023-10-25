@@ -1,21 +1,103 @@
 package view;
 
+import javax.swing.JOptionPane;
+import controller.LivroController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Aluno
  */
 public class frmLivro extends javax.swing.JFrame {
 
+    LivroController lc;
     /**
      * Creates new form frmLivro
      */
     public frmLivro() {
         initComponents();
+        lc = new LivroController(this);
+        try {
+            lc.ListarAutores();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    public JButton getBtnCadastrar() {
+        return btnCadastrar;
+    }
+
+    public JButton getBtnVoltar() {
+        return btnVoltar;
+    }
+
+    public JComboBox<String> getCbIdiomas() {
+        return cbIdiomas;
+    }
+
+    public JComboBox<String> getCbAutor() {
+        return cbAutor;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public JLabel getLblAutor() {
+        return lblAutor;
+    }
+
+    public JLabel getLblCodigo() {
+        return lblCodigo;
+    }
+
+    public JLabel getLblDataLancamento() {
+        return lblDataLancamento;
+    }
+
+    public JLabel getLblId() {
+        return lblId;
+    }
+
+    public JLabel getLblIdiomas() {
+        return lblIdiomas;
+    }
+
+    public JLabel getLblNomeLivro() {
+        return lblNomeLivro;
+    }
+
+    public JLabel getLblTitulo() {
+        return lblTitulo;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+    public JTextField getTxtDataLancamento() {
+        return txtDataLancamento;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    public JTextField getTxtNomeLivro() {
+        return txtNomeLivro;
     }
 
     /**
@@ -42,7 +124,7 @@ public class frmLivro extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbAutor = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +148,11 @@ public class frmLivro extends javax.swing.JFrame {
 
         btnCadastrar.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -96,7 +183,7 @@ public class frmLivro extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -113,7 +200,7 @@ public class frmLivro extends javax.swing.JFrame {
                             .addComponent(lblAutor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblDataLancamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCodigo)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(60, 60, 60))))
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -136,7 +223,7 @@ public class frmLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAutor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblIdiomas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,10 +260,33 @@ public class frmLivro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
+        if (txtCodigo.getText().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtCodigo.getText().length() > 20) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Seu Código Está Vazio!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Caracteres!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().length() > 60) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O Nome não Pode Estar Vazio!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (cbAutor.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Autor!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (cbIdiomas.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Idioma!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -187,16 +297,28 @@ public class frmLivro extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLivro.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -213,8 +335,8 @@ public class frmLivro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cbAutor;
     private javax.swing.JComboBox<String> cbIdiomas;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCodigo;

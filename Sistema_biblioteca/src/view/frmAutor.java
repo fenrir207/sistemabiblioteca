@@ -5,7 +5,11 @@
 package view;
 
 import controller.AutorController;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,8 +31,20 @@ public class frmAutor extends javax.swing.JFrame {
         return txtNome;
     }
 
-    public JTextField getTxtPais() {
-        return txtPais;
+    public JButton getBtCadastrar() {
+        return btCadastrar;
+    }
+
+    public JLabel getLblCadastrar() {
+        return lblCadastrar;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    public JComboBox<String> getCbPais() {
+        return cbPais;
     }
 
     /**
@@ -40,16 +56,19 @@ public class frmAutor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         lblCadastrar = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblPais = new javax.swing.JLabel();
-        txtPais = new javax.swing.JTextField();
         btCadastrar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        cbPais = new javax.swing.JComboBox<>();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,12 +89,6 @@ public class frmAutor extends javax.swing.JFrame {
 
         lblPais.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblPais.setText("País :");
-
-        txtPais.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPaisKeyTyped(evt);
-            }
-        });
 
         btCadastrar.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         btCadastrar.setText("Cadastrar");
@@ -98,28 +111,29 @@ public class frmAutor extends javax.swing.JFrame {
 
         txtId.setEditable(false);
 
+        cbPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brasil", "Estados Unidos", "Inglaterra", "Itália", "Alemanha" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPais)
-                        .addComponent(txtNome)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(btVoltar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                            .addComponent(btCadastrar))
-                        .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtNome)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                        .addComponent(btCadastrar))
+                    .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(60, 60, 60))
-            .addComponent(lblCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +150,7 @@ public class frmAutor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPais)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btCadastrar)
@@ -164,12 +178,23 @@ public class frmAutor extends javax.swing.JFrame {
         controller.verificarQtdCaracterNome(evt, txtNome.getText());
     }//GEN-LAST:event_txtNomeKeyTyped
 
-    private void txtPaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPaisKeyTyped
-        controller.verificarQtdCaracterPais(evt, txtPais.getText());
-    }//GEN-LAST:event_txtPaisKeyTyped
-
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        controller.insert();
+
+        if (txtNome.getText().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNome.getText().length() > 50) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (cbPais.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (btCadastrar.getText().equals("Cadastrar")) {
+                controller.insert();
+            } else {
+                controller.update();
+            }
+        }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -178,7 +203,6 @@ public class frmAutor extends javax.swing.JFrame {
         frmTelaBiblioteca.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
-
 
     /**
      * @param args the command line arguments
@@ -220,6 +244,8 @@ public class frmAutor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btVoltar;
+    private javax.swing.JComboBox<String> cbPais;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCadastrar;
     private javax.swing.JLabel lblId;
@@ -227,6 +253,5 @@ public class frmAutor extends javax.swing.JFrame {
     private javax.swing.JLabel lblPais;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtPais;
     // End of variables declaration//GEN-END:variables
 }
