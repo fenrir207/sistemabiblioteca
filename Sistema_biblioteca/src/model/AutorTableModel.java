@@ -14,14 +14,26 @@ import javax.swing.table.AbstractTableModel;
 public class AutorTableModel extends AbstractTableModel {
 
     private final String[] colunas = {
-        "Nome", "País", "Livros", "Data de Criação"
+        "Nome", "País", "Data de Criação"
     };
     private final ArrayList<Autor> autores;
 
+    public AutorTableModel() {
+        this.autores = null;
+    }
+    
     public AutorTableModel(ArrayList<Autor> listaAutor) {
         autores = new ArrayList<>();
     }
 
+    public ArrayList<Autor> getAutores() {
+        return autores;
+    }
+    
+    public void setRowCount(int index){
+        Autor autor = autores.get(index);
+    }
+    
     @Override
     public int getRowCount() {
         return autores.size();
@@ -41,8 +53,6 @@ public class AutorTableModel extends AbstractTableModel {
             case 1:
                 return autor.getPais();
             case 2:
-                return autor.getLivros();
-            case 3:
                 return autor.getDataCriacao();
         }
         return autor;
