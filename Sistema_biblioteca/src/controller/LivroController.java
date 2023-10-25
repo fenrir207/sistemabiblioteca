@@ -20,8 +20,8 @@ public class LivroController {
 
     private frmLivro vLivro;
     private frmTelaBiblioteca vBiblioteca;
-    private LivroDAO dao;
-    private AutorDAO daoa;
+    private LivroDAO daoLivro;
+    private AutorDAO daoAutor;
     private ArrayList<Livro> listaLivro;
     private ArrayList<Autor> listaAutor;
 
@@ -30,10 +30,10 @@ public class LivroController {
 
     public LivroController(frmLivro vLivro) {
         this.vLivro = vLivro;
-        dao = new LivroDAO();
-        daoa = new AutorDAO();
+        daoLivro = new LivroDAO();
+        daoAutor = new AutorDAO();
         try {
-            listaAutor = daoa.readAll();
+            listaAutor = daoAutor.readAll();
         } catch (SQLException ex) {
             Logger.getLogger(LivroController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,11 +44,16 @@ public class LivroController {
     }
 
     public void ListarAutores() throws SQLException {
-        listaAutor = daoa.readAll();
-
+        
+        String country[]={"India","Aus","U.S.A","England","Newzealand"};        
+        
+        daoLivro = new LivroDAO();
+        daoAutor = new AutorDAO();
+        listaAutor = daoAutor.readAll();
         for (Autor autor : listaAutor) {
             System.out.println(autor.getNome());
-            vLivro.getCbAutor().addItem(autor.getNome());}
+            vLivro.getCbAutor().addItem(autor.getNome());
+        }
     }
 
 }
