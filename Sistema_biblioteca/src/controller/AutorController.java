@@ -38,7 +38,7 @@ public class AutorController {
     
     public void insert(){
         String nome = vAutor.getTxtNome().getText();
-        String pais = vAutor.getTxtPais().getText();
+        String pais = vAutor.getCbPais().getSelectedItem().toString();
         
         if(verificarCampoVazio(nome, pais)){
             Autor a = new Autor();
@@ -55,6 +55,46 @@ public class AutorController {
         }
     }
     
+    public void update(){
+        String nome = vAutor.getTxtNome().getText();
+        String pais = vAutor.getCbPais().getSelectedItem().toString();
+        System.out.println(pais);
+        String id = vAutor.getTxtId().getText();
+        if(verificarCampoVazio(nome, pais) && !id.isEmpty()){
+            Autor a = new Autor();
+            a.setId(Integer.parseInt(id));
+            a.setNome(nome);
+            a.setPais(pais);
+            a.setDataCriacao(LocalDate.now());
+            
+            try {
+                dao.update(a);
+                limparCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void delete() throws SQLException{
+        int row;
+        row = vBiblioteca.getTblTabela().getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Nenhum autor selecionado", "Erro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            int id = Integer.parseInt(vBiblioteca.getTblTabela().getValueAt(row, 0).toString());
+            String nome = vBiblioteca.getTblTabela().getValueAt(row, 1).toString();
+            boolean opc = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir " + nome + "?","Excluir",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == 0;
+            
+            if(opc){
+                dao.delete(id);
+            }else{
+                JOptionPane.showMessageDialog(null, "Operação cancelada!");
+            }
+        }
+    }
+    
     public void getTableAutor() throws SQLException{
         listaAutor = dao.readAll();
         AutorTableModel aModel = new AutorTableModel(listaAutor);
@@ -67,6 +107,19 @@ public class AutorController {
             aModel.addRow(autor);
         }
         vBiblioteca.getTblTabela().setModel(aModel);
+    }
+    
+    public void getDataField(){
+        int row = vBiblioteca.getTblTabela().getSelectedRow();
+        
+        if(row != -1){
+            vAutor.getTxtId().setText(String.valueOf(listaAutor.get(row).getId()));
+            vAutor.getTxtNome().setText(listaAutor.get(row).getNome());
+            vAutor.getCbPais().setSelectedItem(listaAutor.get(row).getPais());
+            
+            vAutor.getBtCadastrar().setText("Alterar");
+            vAutor.getLblCadastrar().setText("Alterar autor");
+        }
     }
     
     public boolean verificarCampoVazio(String nome, String pais){
@@ -97,8 +150,16 @@ public class AutorController {
     
     public void limparCampos(){
         vAutor.getTxtNome().setText("");
-        vAutor.getTxtPais().setText("");
+        vAutor.getCbPais().setSelectedIndex(0);
         
         vAutor.getTxtNome().requestFocus();
+    }
+    
+    public void initViewCadastrarAutor(){
+        vAutor = new frmAutor();
+        vAutor.setLocationRelativeTo(null);
+        vAutor.setVisible(true);
+        
+        vBiblioteca.dispose();
     }
 }

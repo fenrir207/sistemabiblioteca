@@ -180,7 +180,7 @@ public class LivroDAO implements DAO {
 //CRUD DROP/DELETE (deletar)
 
     @Override
-    public void delete(String where) throws SQLException {
+    public void delete(int id) throws SQLException {
         //instancia nova conexao com o banco de dados
         Connection con = ConnectionFactory.getConnection();
         //instancia os argumentos do banco de dados
