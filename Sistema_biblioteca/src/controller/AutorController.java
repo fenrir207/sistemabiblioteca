@@ -38,7 +38,7 @@ public class AutorController {
     
     public void insert(){
         String nome = vAutor.getTxtNome().getText();
-        String pais = vAutor.getTxtPais().getText();
+        String pais = vAutor.getCbPais().getSelectedItem().toString();
         
         if(verificarCampoVazio(nome, pais)){
             Autor a = new Autor();
@@ -57,7 +57,8 @@ public class AutorController {
     
     public void update(){
         String nome = vAutor.getTxtNome().getText();
-        String pais = vAutor.getTxtPais().getText();
+        String pais = vAutor.getCbPais().getSelectedItem().toString();
+        System.out.println(pais);
         String id = vAutor.getTxtId().getText();
         if(verificarCampoVazio(nome, pais) && !id.isEmpty()){
             Autor a = new Autor();
@@ -114,7 +115,7 @@ public class AutorController {
         if(row != -1){
             vAutor.getTxtId().setText(String.valueOf(listaAutor.get(row).getId()));
             vAutor.getTxtNome().setText(listaAutor.get(row).getNome());
-            vAutor.getTxtPais().setText(listaAutor.get(row).getPais());
+            vAutor.getCbPais().setSelectedItem(listaAutor.get(row).getPais());
             
             vAutor.getBtCadastrar().setText("Alterar");
             vAutor.getLblCadastrar().setText("Alterar autor");
@@ -149,7 +150,7 @@ public class AutorController {
     
     public void limparCampos(){
         vAutor.getTxtNome().setText("");
-        vAutor.getTxtPais().setText("");
+        vAutor.getCbPais().setSelectedIndex(0);
         
         vAutor.getTxtNome().requestFocus();
     }

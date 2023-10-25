@@ -6,6 +6,7 @@ package view;
 
 import controller.AutorController;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
@@ -41,6 +42,12 @@ public class frmAutor extends javax.swing.JFrame {
     public JTextField getTxtId() {
         return txtId;
     }
+
+    public JComboBox<String> getCbPais() {
+        return cbPais;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,6 +111,8 @@ public class frmAutor extends javax.swing.JFrame {
         lblId.setText("ID :");
 
         txtId.setEditable(false);
+
+        cbPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brasil", "Estados Unidos", "Inglaterra", "Itália", "Alemanha" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
