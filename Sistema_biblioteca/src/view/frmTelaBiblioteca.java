@@ -103,6 +103,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
         btAlterar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
         btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -127,6 +132,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
         btExcluir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
         btExcluir.setText("Excluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Idioma", "Data de Lançamento", "Data de Cadastro" }));
 
@@ -241,6 +251,24 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cbBibliotecaActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        if(cbBiblioteca.getSelectedIndex() == 0){
+            
+        }else{
+            try {
+                aController.delete();
+                aController.getTableAutor();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        aController.initViewCadastrarAutor();
+        aController.getDataField();
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     /**
      * @param args the command line arguments

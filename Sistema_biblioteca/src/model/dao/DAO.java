@@ -20,7 +20,7 @@ public interface DAO {
     public void update(Object o) throws SQLException;
 
     // metodo excluir/deletar
-    public void delete(String where) throws SQLException;
+    public void delete(int id) throws SQLException;
 
     //metodo listarTodos
     public ArrayList readAll() throws SQLException;
