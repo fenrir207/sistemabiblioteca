@@ -162,11 +162,12 @@ public class frmAutor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNome.getText().length() > 50) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (cbPais.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else {
             controller.insert();
-            JOptionPane.showConfirmDialog(null, "Autor cadastrado com sucesso!!!");
         }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
