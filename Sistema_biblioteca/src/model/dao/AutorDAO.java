@@ -125,11 +125,11 @@ public class AutorDAO implements DAO {
         //tentativa do comando UPDATE
         try {
 
-            stmt = con.prepareStatement("UPDATE tb_autores SET nome_autor = ? ,pais_autor = ? ,livros_autor = ?,data_criacao_autor = ? WHERE id_autor = ?");
+            stmt = con.prepareStatement("UPDATE tb_autores SET nome_autor = ? ,pais_autor = ?,data_criacao = ? WHERE id_autor = ?");
             stmt.setString(1, autor.getNome());
             stmt.setString(2, autor.getPais());
-            stmt.setString(3, autor.getLivros());
-            stmt.setDate(4, Date.valueOf(LocalDate.now()));
+            stmt.setDate(3, Date.valueOf(LocalDate.now()));
+            stmt.setInt(4, autor.getId());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");

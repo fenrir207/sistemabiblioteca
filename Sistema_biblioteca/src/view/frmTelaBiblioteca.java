@@ -103,6 +103,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
         btAlterar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
         btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -259,6 +264,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        aController.initViewCadastrarAutor();
+        aController.getDataField();
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     /**
      * @param args the command line arguments

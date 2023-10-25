@@ -55,6 +55,26 @@ public class AutorController {
         }
     }
     
+    public void update(){
+        String nome = vAutor.getTxtNome().getText();
+        String pais = vAutor.getTxtPais().getText();
+        String id = vAutor.getTxtId().getText();
+        if(verificarCampoVazio(nome, pais) && !id.isEmpty()){
+            Autor a = new Autor();
+            a.setId(Integer.parseInt(id));
+            a.setNome(nome);
+            a.setPais(pais);
+            a.setDataCriacao(LocalDate.now());
+            
+            try {
+                dao.update(a);
+                limparCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public void delete() throws SQLException{
         int row;
         row = vBiblioteca.getTblTabela().getSelectedRow();
@@ -88,6 +108,19 @@ public class AutorController {
         vBiblioteca.getTblTabela().setModel(aModel);
     }
     
+    public void getDataField(){
+        int row = vBiblioteca.getTblTabela().getSelectedRow();
+        
+        if(row != -1){
+            vAutor.getTxtId().setText(String.valueOf(listaAutor.get(row).getId()));
+            vAutor.getTxtNome().setText(listaAutor.get(row).getNome());
+            vAutor.getTxtPais().setText(listaAutor.get(row).getPais());
+            
+            vAutor.getBtCadastrar().setText("Alterar");
+            vAutor.getLblCadastrar().setText("Alterar autor");
+        }
+    }
+    
     public boolean verificarCampoVazio(String nome, String pais){
         if(nome.isEmpty()){
             JOptionPane.showMessageDialog(null, "Informe o nome do autor!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
@@ -119,5 +152,13 @@ public class AutorController {
         vAutor.getTxtPais().setText("");
         
         vAutor.getTxtNome().requestFocus();
+    }
+    
+    public void initViewCadastrarAutor(){
+        vAutor = new frmAutor();
+        vAutor.setLocationRelativeTo(null);
+        vAutor.setVisible(true);
+        
+        vBiblioteca.dispose();
     }
 }

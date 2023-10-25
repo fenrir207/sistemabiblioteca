@@ -5,6 +5,8 @@
 package view;
 
 import controller.AutorController;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -29,6 +31,18 @@ public class frmAutor extends javax.swing.JFrame {
 
     public JTextField getTxtPais() {
         return txtPais;
+    }
+
+    public JButton getBtCadastrar() {
+        return btCadastrar;
+    }
+
+    public JLabel getLblCadastrar() {
+        return lblCadastrar;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
     }
 
     /**
@@ -169,7 +183,11 @@ public class frmAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPaisKeyTyped
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        controller.insert();
+        if (btCadastrar.getText().equals("Cadastrar")) {
+            controller.insert();
+        }else{
+            controller.update();
+        }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -178,7 +196,6 @@ public class frmAutor extends javax.swing.JFrame {
         frmTelaBiblioteca.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
-
 
     /**
      * @param args the command line arguments
