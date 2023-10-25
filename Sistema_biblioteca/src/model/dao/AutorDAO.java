@@ -144,16 +144,14 @@ public class AutorDAO implements DAO {
     }
 
     @Override
-    public void delete(String where) throws SQLException {
+    public void delete(int id) throws SQLException {
 
         Connection con = ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            Autor autor = new Autor();
-            stmt = con.prepareStatement("DELETE FROM tb_autores WHERE id = ?");
-            stmt.setInt(1, autor.getId());
+            stmt = con.prepareStatement("DELETE FROM tb_autores WHERE id_autor = " + id);
 
             stmt.executeUpdate();
 

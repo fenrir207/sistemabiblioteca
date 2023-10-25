@@ -55,6 +55,25 @@ public class AutorController {
         }
     }
     
+    public void delete() throws SQLException{
+        int row;
+        row = vBiblioteca.getTblTabela().getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Nenhum autor selecionado", "Erro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            int id = Integer.parseInt(vBiblioteca.getTblTabela().getValueAt(row, 0).toString());
+            String nome = vBiblioteca.getTblTabela().getValueAt(row, 1).toString();
+            boolean opc = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir " + nome + "?","Excluir",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == 0;
+            
+            if(opc){
+                dao.delete(id);
+            }else{
+                JOptionPane.showMessageDialog(null, "Operação cancelada!");
+            }
+        }
+    }
+    
     public void getTableAutor() throws SQLException{
         listaAutor = dao.readAll();
         AutorTableModel aModel = new AutorTableModel(listaAutor);
