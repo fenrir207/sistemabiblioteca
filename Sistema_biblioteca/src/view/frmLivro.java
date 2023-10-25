@@ -170,12 +170,6 @@ public class frmLivro extends javax.swing.JFrame {
         lblCodigo.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         lblCodigo.setText("Código");
 
-        cbAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAutorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -292,14 +286,6 @@ public class frmLivro extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-    private void cbAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAutorActionPerformed
-
-/**
- * @param args the command line arguments
- */
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
