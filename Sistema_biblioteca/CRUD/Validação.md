@@ -30,3 +30,9 @@ Teste 4
 *Foi implementado o comando de **excluir e editar** os dados existentes. Novamente, o campo de preencher o nome está aceitando caracteres especiais. De resto, está correto. E a interface foi editada, para uma melhor visualização, e evitando erros de digitação no campo **PAÍS** que está sendou usada uma caixa de seleção.*
 
 **////////////////////////////////////////////////////////**
+
+Teste 5
+
+*O erro de cadastrar caracteres especiais foi corrigido. Porém, não da para adcionar espaço no nome. Por exemplo: Chico Buarque*
+
+**////////////////////////////////////////////////////////**
