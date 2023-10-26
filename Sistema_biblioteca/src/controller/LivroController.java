@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
@@ -40,7 +41,7 @@ public class LivroController {
         }
     }
 
-    public boolean verificarCampoVazio(String codigo, String nome, String autor, String idioma, String data) {
+    public boolean verificarCampoVazio(String nome, String autor, String idioma, String data) {
         if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe o nome do autor!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
 
@@ -55,7 +56,7 @@ public class LivroController {
         String idioma = vLivro.getCbIdiomas().getSelectedItem().toString();
         String data = vLivro.getTxtDataLancamento().getText();
 
-        if (verificarCampoVazio(codigo, nome, autor, idioma, data)) {
+        if (verificarCampoVazio(nome, autor, idioma, data)) {
             Livro l = new Livro();
             l.setISBN(codigo);
             l.setNome(nome);
@@ -65,27 +66,27 @@ public class LivroController {
 
             try {
                 daoLivro.insert(l);
-               // limparCampos();
+                // limparCampos();
             } catch (SQLException ex) {
                 Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
     }
-    public void getTableLivro() throws SQLException{
+
+    public void getTableLivro() throws SQLException {
         listaLivro = daoLivro.readAll();
         LivroTableModel aModel = new LivroTableModel(listaLivro);
-        
+
         for (int i = 0; i < aModel.getColumnCount(); i++) {
             vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(aModel.getColumnName(i));
         }
-        
+
         for (Livro livro : listaLivro) {
             aModel.addRow(livro);
         }
         vBiblioteca.getTblTabela().setModel(aModel);
     }
-
 
     public void ListarAutores() throws SQLException {
 
@@ -97,7 +98,6 @@ public class LivroController {
             vLivro.getCbAutor().addItem(autor.getNome());
         }
     }
-
 
     public void delete() throws SQLException {
         int row;
@@ -116,6 +116,38 @@ public class LivroController {
                 JOptionPane.showMessageDialog(null, "Operação cancelada!");
             }
         }
+    }
+
+    public void Update() {
+        String nome = vLivro.getTxtNomeLivro().getText();
+        String autor = vLivro.getTxtNomeLivro().getText();
+        String idioma = vLivro.getTxtNomeLivro().getText();
+        String data = vLivro.getTxtDataLancamento().getText();
+        String id = vLivro.getTxtId().getText();
+        if (verificarCampoVazio(nome, autor, idioma, data) && !id.isEmpty()) {
+            Livro l = new Livro();
+            l.setId(Integer.parseInt(id));
+            l.setNome(nome);
+            l.setAutor(autor);
+            l.setIdioma(idioma);
+            l.setData_lancamento(LocalDate.parse(data));
+
+            try {
+                daoLivro.update(l);
+                limparCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        }
+    }
+
+    public void limparCampos() {
+        vLivro.getTxtNomeLivro().setText("");
+        vLivro.getCbAutor().setSelectedIndex(0);
+        vLivro.getCbIdiomas().setSelectedIndex(0);
+
+        vLivro.getTxtNomeLivro().requestFocus();
     }
 
 }

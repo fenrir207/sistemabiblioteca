@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.JOptionPane;
 import controller.LivroController;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -147,6 +148,11 @@ public class frmLivro extends javax.swing.JFrame {
 
         btnCadastrar.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -165,12 +171,6 @@ public class frmLivro extends javax.swing.JFrame {
 
         lblCodigo.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         lblCodigo.setText("Código");
-
-        cbAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAutorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -262,14 +262,38 @@ public class frmLivro extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void cbAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAutorActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+        if (txtCodigo.getText().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtCodigo.getText().length() > 20) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Seu Código Está Vazio!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Caracteres!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().length() > 60) {
+            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtNomeLivro.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O Nome não Pode Estar Vazio!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (cbAutor.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Autor!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (cbIdiomas.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Idioma!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
