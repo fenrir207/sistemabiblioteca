@@ -109,6 +109,20 @@ public class AutorController {
         vBiblioteca.getTblTabela().setModel(aModel);
     }
     
+    public void getTableAutor(String search) throws SQLException{
+        listaAutor = dao.search(search);
+        AutorTableModel aModel = new AutorTableModel(listaAutor);
+        
+        for (int i = 0; i < aModel.getColumnCount(); i++) {
+            vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(aModel.getColumnName(i));
+        }
+        
+        for (Autor autor : listaAutor) {
+            aModel.addRow(autor);
+        }
+        vBiblioteca.getTblTabela().setModel(aModel);
+    }
+    
     public void getDataField(){
         int row = vBiblioteca.getTblTabela().getSelectedRow();
         
@@ -120,6 +134,24 @@ public class AutorController {
             vAutor.getBtCadastrar().setText("Alterar");
             vAutor.getLblCadastrar().setText("Alterar autor");
         }
+    }
+    
+    public void getData(){
+        
+        if(vBiblioteca.getTxtPesquisar().getText().trim().isEmpty()){
+            try {
+                getTableAutor();
+            } catch (SQLException ex) {
+                Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                getTableAutor(vBiblioteca.getTxtPesquisar().getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
     }
     
     public boolean verificarCampoVazio(String nome, String pais){

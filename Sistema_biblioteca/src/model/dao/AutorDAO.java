@@ -89,7 +89,7 @@ public class AutorDAO implements DAO {
         ArrayList<Autor> listaAutor = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_autores WHERE nome LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tb_autores WHERE nome_autor LIKE ?");
             stmt.setString(1, "%" + desc + "%");
 
             rs = stmt.executeQuery();
@@ -101,8 +101,7 @@ public class AutorDAO implements DAO {
                 a.setId(rs.getInt("id_autor"));
                 a.setNome(rs.getString("nome_autor"));
                 a.setPais(rs.getString("pais_autor"));
-                a.setLivros(rs.getString("livros_autor"));
-                a.setDataCriacao(rs.getDate("data_criacao_autor").toLocalDate());
+                a.setDataCriacao(rs.getDate("data_criacao").toLocalDate());
                 listaAutor.add(a);
             }
 

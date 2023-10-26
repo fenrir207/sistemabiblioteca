@@ -10,13 +10,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Aluno
  */
 public class frmTelaBiblioteca extends javax.swing.JFrame {
+
     AutorController aController;
+
     /**
      * Creates new form frmTelaBiblioteca
      */
@@ -24,9 +27,13 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         initComponents();
         aController = new AutorController(this);
     }
-    
-    public JTable getTblTabela(){
+
+    public JTable getTblTabela() {
         return tblTabela;
+    }
+
+    public JTextField getTxtPesquisar() {
+        return txtPesquisar;
     }
 
     /**
@@ -110,8 +117,8 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         });
 
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPesquisarKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyReleased(evt);
             }
         });
 
@@ -215,12 +222,8 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarKeyTyped
-
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-     frmLivro frmLivro = new frmLivro();
+        frmLivro frmLivro = new frmLivro();
         frmLivro.setLocationRelativeTo(this);
         frmLivro.setVisible(true);
         this.dispose();
@@ -234,7 +237,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_btAutorActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-         int escolha = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        int escolha = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (escolha == 0) {
             frmTelaBiblioteca.this.dispose();
         }
@@ -242,8 +245,8 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
     private void cbBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBibliotecaActionPerformed
         if (cbBiblioteca.getSelectedIndex() == 0) {
-            
-        }else{
+
+        } else {
             try {
                 aController.getTableAutor();
             } catch (SQLException ex) {
@@ -253,9 +256,9 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBibliotecaActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        if(cbBiblioteca.getSelectedIndex() == 0){
-            
-        }else{
+        if (cbBiblioteca.getSelectedIndex() == 0) {
+
+        } else {
             try {
                 aController.delete();
                 aController.getTableAutor();
@@ -269,6 +272,14 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         aController.initViewCadastrarAutor();
         aController.getDataField();
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+        if (cbBiblioteca.getSelectedIndex() == 0) {
+
+        } else {
+            aController.getData();
+        }
+    }//GEN-LAST:event_txtPesquisarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -300,12 +311,12 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                   frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
+                frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
                 frmTelaBiblioteca.setLocationRelativeTo(frmTelaBiblioteca);
                 frmTelaBiblioteca.setVisible(true);
             }
         });
-    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
