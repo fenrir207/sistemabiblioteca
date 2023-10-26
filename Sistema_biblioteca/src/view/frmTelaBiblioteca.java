@@ -5,6 +5,7 @@
 package view;
 
 import controller.AutorController;
+import controller.LivroController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import javax.swing.JTable;
  * @author Aluno
  */
 public class frmTelaBiblioteca extends javax.swing.JFrame {
+    LivroController lController;
     AutorController aController;
     /**
      * Creates new form frmTelaBiblioteca
@@ -242,7 +244,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
     private void cbBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBibliotecaActionPerformed
         if (cbBiblioteca.getSelectedIndex() == 0) {
-            
+            try {
+                lController.getTableLivro();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             try {
                 aController.getTableAutor();
