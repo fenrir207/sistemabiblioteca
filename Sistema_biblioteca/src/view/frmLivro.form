@@ -192,7 +192,11 @@
         <Component class="javax.swing.JComboBox" name="cbIdiomas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Portugu&#xea;s"/>
+                <StringItem index="1" value="Ingl&#xea;s"/>
+                <StringItem index="2" value="Espanhol"/>
+              </StringArray>
             </Property>
           </Properties>
           <AuxValues>

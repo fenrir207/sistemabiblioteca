@@ -183,7 +183,6 @@ public class AutorController {
     public void limparCampos(){
         vAutor.getTxtNome().setText("");
         vAutor.getCbPais().setSelectedIndex(0);
-        
         vAutor.getTxtNome().requestFocus();
     }
     

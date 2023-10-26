@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 public class frmLivro extends javax.swing.JFrame {
 
     LivroController lc;
+
     /**
      * Creates new form frmLivro
      */
@@ -35,7 +36,6 @@ public class frmLivro extends javax.swing.JFrame {
         }
     }
 
-    
     public JButton getBtnCadastrar() {
         return btnCadastrar;
     }
@@ -162,6 +162,8 @@ public class frmLivro extends javax.swing.JFrame {
             }
         });
 
+        cbIdiomas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Português", "Inglês", "Espanhol" }));
+
         lblId.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblId.setText("ID :");
 
@@ -257,11 +259,15 @@ public class frmLivro extends javax.swing.JFrame {
         frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
         frmTelaBiblioteca.setLocationRelativeTo(this);
         frmTelaBiblioteca.setVisible(true);
-        this.dispose();
+    this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
 
+
+    /**
+     * @param args the command line arguments
+     */
         if (txtCodigo.getText().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtCodigo.getText().length() > 20) {
@@ -287,6 +293,7 @@ public class frmLivro extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -298,27 +305,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
