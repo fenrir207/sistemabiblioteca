@@ -77,7 +77,7 @@ public class LivroController {
 
             try {
                 daoLivro.insert(l);
-                // limparCampos();
+                 limparCampos();
             } catch (SQLException ex) {
                 Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
             }
