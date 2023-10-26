@@ -182,6 +182,8 @@ public class frmAutor extends javax.swing.JFrame {
 
         if (txtNome.getText().matches("^[0-9]+$")) {
             JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        }else if (!txtNome.getText().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
         } else if (txtNome.getText().length() > 50) {
