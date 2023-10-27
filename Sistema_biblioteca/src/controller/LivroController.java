@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ public class LivroController {
     private AutorDAO daoAutor;
     private ArrayList<Livro> listaLivro;
     private ArrayList<Autor> listaAutor;
+    private DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public LivroController() {
     }
@@ -36,48 +38,72 @@ public class LivroController {
         daoAutor = new AutorDAO();
         try {
             listaAutor = daoAutor.readAll();
+            listaLivro = daoLivro.readAll();
+
         } catch (SQLException ex) {
             Logger.getLogger(LivroController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public LivroController(frmTelaBiblioteca vBiblioteca) {
         this.vBiblioteca = vBiblioteca;
         daoLivro = new LivroDAO();
         daoAutor = new AutorDAO();
         try {
+            listaLivro = daoLivro.readAll();
             listaAutor = daoAutor.readAll();
         } catch (SQLException ex) {
             Logger.getLogger(LivroController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public boolean verificarCampoVazio(String nome, String autor, String idioma, String data) {
-        if (nome.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Informe o nome do autor!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
-
+    public boolean verificarCampoVazio(String isbn, String nome, Autor autor, String idioma, String data) {
+        if (isbn.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe o código do livro!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
-        return false;
+
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe o nome do livro!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (autor == null) {
+            JOptionPane.showMessageDialog(null, "Informe um autor", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (idioma.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe um idioma!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (data.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe a data de lançamento!", "Erro no cadastro", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
-    public void insert() {
+    public void insert(Autor a) {
         String codigo = vLivro.getTxtCodigo().getText();
         String nome = vLivro.getTxtNomeLivro().getText();
         String autor = vLivro.getCbAutor().getSelectedItem().toString();
         String idioma = vLivro.getCbIdiomas().getSelectedItem().toString();
         String data = vLivro.getTxtDataLancamento().getText();
 
-        if (verificarCampoVazio(nome, autor, idioma, data)) {
+        if (verificarCampoVazio(codigo, nome, a, idioma, data)) {
             Livro l = new Livro();
             l.setISBN(codigo);
             l.setNome(nome);
-            l.setAutor(autor);
-            l.setData_lancamento(LocalDate.parse(data));
+            l.setIdioma(idioma);
+            l.setAutor(a);
+            l.setData_lancamento(LocalDate.parse(data, fmt));
             l.setData_criacao(LocalDate.now());
 
             try {
                 daoLivro.insert(l);
-                 limparCampos();
+                limparCampos();
             } catch (SQLException ex) {
                 Logger.getLogger(AutorController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -87,19 +113,18 @@ public class LivroController {
 
     public void getTableLivro() throws SQLException {
         listaLivro = daoLivro.readAll();
-        LivroTableModel aModel = new LivroTableModel(listaLivro);
+        LivroTableModel lModel = new LivroTableModel(listaLivro);
+        
+        System.out.println(listaLivro);
 
-        for (int i = 0; i < aModel.getColumnCount(); i++) {
-            vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(aModel.getColumnName(i));
+        for (int i = 0; i < lModel.getColumnCount(); i++) {
+            vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(lModel.getColumnName(i));
         }
-
-        for (Livro livro : listaLivro) {
-            aModel.addRow(livro);
-        }
-        vBiblioteca.getTblTabela().setModel(aModel);
+        
+        vBiblioteca.getTblTabela().setModel(lModel);
     }
 
-    public void ListarAutores() throws SQLException {
+    public ArrayList ListarAutores() throws SQLException {
 
         daoLivro = new LivroDAO();
         daoAutor = new AutorDAO();
@@ -108,6 +133,8 @@ public class LivroController {
             System.out.println(autor.getNome());
             vLivro.getCbAutor().addItem(autor.getNome());
         }
+
+        return listaAutor;
     }
 
     public void delete() throws SQLException {
@@ -129,17 +156,20 @@ public class LivroController {
         }
     }
 
-    public void Update() {
+    public void Update(Autor a) {
+        String codigo = vLivro.getTxtCodigo().getText();
         String nome = vLivro.getTxtNomeLivro().getText();
         String autor = vLivro.getTxtNomeLivro().getText();
         String idioma = vLivro.getTxtNomeLivro().getText();
         String data = vLivro.getTxtDataLancamento().getText();
         String id = vLivro.getTxtId().getText();
-        if (verificarCampoVazio(nome, autor, idioma, data) && !id.isEmpty()) {
+        if (verificarCampoVazio(codigo, nome, a, idioma, data) && !id.isEmpty()) {
             Livro l = new Livro();
+
             l.setId(Integer.parseInt(id));
+            l.setISBN(codigo);
             l.setNome(nome);
-            l.setAutor(autor);
+            l.setAutor(a);
             l.setIdioma(idioma);
             l.setData_lancamento(LocalDate.parse(data));
 

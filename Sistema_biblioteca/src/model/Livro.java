@@ -17,18 +17,18 @@ public class Livro {
     private int id;
     private String isbn;
     private String nome;
-    private String autor;
+    private Autor autor;
     private String idioma;
     private LocalDate data_lancamento;
     private LocalDate data_criacao;
 
     private ArrayList<LivroTableModel> livros;
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
