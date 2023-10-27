@@ -146,6 +146,12 @@ public class frmLivro extends javax.swing.JFrame {
         lblDataLancamento.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblDataLancamento.setText("Data de Lançamento:");
 
+        txtDataLancamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDataLancamentoMouseClicked(evt);
+            }
+        });
+
         btnCadastrar.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,15 +293,20 @@ public class frmLivro extends javax.swing.JFrame {
         } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         }
+    
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    
     private void cbAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAutorActionPerformed
+
+    private void txtDataLancamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDataLancamentoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataLancamentoMouseClicked
 
 /**
  * @param args the command line arguments
@@ -342,6 +353,9 @@ public static void main(String args[]) {
                 frmLivro frmLivro = new frmLivro();
                 frmLivro.setLocationRelativeTo(frmLivro);
                 frmLivro.setVisible(true);
+                frmLivro.getLblId().setVisible(false);
+                frmLivro.getTxtId().setVisible(false);
+                
             }
         });
     }

@@ -17,6 +17,31 @@ import javax.swing.JOptionPane;
  */
 public class frmAutor extends javax.swing.JFrame {
 
+    public JLabel getLblId() {
+        return lblId;
+    }
+
+    public void setLblId(JLabel lblId) {
+        this.lblId = lblId;
+    }
+
+    public JLabel getLblNome() {
+        return lblNome;
+    }
+
+    public void setLblNome(JLabel lblNome) {
+        this.lblNome = lblNome;
+    }
+
+    public JLabel getLblPais() {
+        return lblPais;
+    }
+
+    public void setLblPais(JLabel lblPais) {
+        this.lblPais = lblPais;
+    }
+    
+
     AutorController controller;
 
     /**
@@ -30,7 +55,7 @@ public class frmAutor extends javax.swing.JFrame {
     public JTextField getTxtNome() {
         return txtNome;
     }
-    
+
     public JButton getBtCadastrar() {
         return btCadastrar;
     }
@@ -46,8 +71,7 @@ public class frmAutor extends javax.swing.JFrame {
     public JComboBox<String> getCbPais() {
         return cbPais;
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,20 +205,34 @@ public class frmAutor extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         if (btCadastrar.getText().equals("Cadastrar")) {
-            controller.insert();
-        }else{
-            controller.update();
-        if (txtNome.getText().matches("^[0-9]+$")) {
-            JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
-        } else if (txtNome.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
-        } else if (txtNome.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
-        } else if (cbPais.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            if (!txtNome.getText().matches("^[a-zA-Z0-9_ ]*$")) {
+                JOptionPane.showMessageDialog(null, "Você só pode escrever letras!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            } 
+            else if (txtNome.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            } 
+            else if (txtNome.getText().length() < 3) {
+                JOptionPane.showMessageDialog(null, "Um nome deve ter pelo menos 3 letras!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (cbPais.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            } 
+            else {
+                controller.insert();
+            }
         } else {
-            controller.insert();
-        }
+            controller.update();
+            if (txtNome.getText().matches("^[0-9]+$")) {
+                JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            } else if (txtNome.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            } else if (txtNome.getText().length() > 20) {
+                JOptionPane.showMessageDialog(null, "Você Atingiu o Máximo de Caracteres no Nome!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            } else if (cbPais.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                controller.insert();
+            }
     }//GEN-LAST:event_btCadastrarActionPerformed
     }
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -237,6 +275,8 @@ public class frmAutor extends javax.swing.JFrame {
                 frmAutor frmAutor = new frmAutor();
                 frmAutor.setLocationRelativeTo(frmAutor);
                 frmAutor.setVisible(true);
+                frmAutor.getTxtId().setVisible(false);
+                frmAutor.getLblId().setVisible(false);
             }
         });
     }
