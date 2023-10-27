@@ -3,6 +3,8 @@ package view;
 import javax.swing.JOptionPane;
 import controller.LivroController;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Autor;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,6 +25,9 @@ import javax.swing.JTextField;
 public class frmLivro extends javax.swing.JFrame {
 
     LivroController lc;
+    ArrayList<Autor> listaAutor;
+    
+    
 
     /**
      * Creates new form frmLivro
@@ -30,7 +36,7 @@ public class frmLivro extends javax.swing.JFrame {
         initComponents();
         lc = new LivroController(this);
         try {
-            lc.ListarAutores();
+            listaAutor = lc.ListarAutores();
         } catch (SQLException ex) {
             Logger.getLogger(frmLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,10 +270,6 @@ public class frmLivro extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
 
-
-    /**
-     * @param args the command line arguments
-     */
         if (txtCodigo.getText().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtCodigo.getText().length() > 20) {
@@ -286,6 +288,8 @@ public class frmLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Idioma!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            lc.insert(listaAutor.get(cbAutor.getSelectedIndex()));
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

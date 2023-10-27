@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Autor;
 import model.Livro;
 
 /**
@@ -35,11 +36,11 @@ public class LivroDAO implements DAO {
         PreparedStatement stmt = null;
 
         try {
-            Livro livro = new Livro();
-            stmt = con.prepareStatement("INSERT INTO tb_livros (isbn_livro ,nome_livro ,autor_livro ,idioma_livro ,data_lancamento_livro ,data_criacao_livro)VALUES(?,?,?,?,?,?)");
-            stmt.setString(1, livro.getISBN());
-            stmt.setString(2, livro.getNome());
-            stmt.setString(3, livro.getAutor());
+            Livro livro = (Livro) o;
+            stmt = con.prepareStatement("INSERT INTO tb_livros (id_autor, isbn_livro, nome_livro, idioma_livro, data_lancamento_livro, data_criacao_livro)VALUES(?,?,?,?,?,?)");
+            stmt.setInt(1, livro.getAutor().getId());
+            stmt.setString(2, livro.getISBN());
+            stmt.setString(3, livro.getNome());
             stmt.setString(4, livro.getIdioma());
             stmt.setDate(5,Date.valueOf(livro.getData_lancamento()));
             stmt.setDate(6, Date.valueOf(LocalDate.now()));
@@ -68,25 +69,28 @@ public class LivroDAO implements DAO {
         ArrayList<Livro> livros = new ArrayList<>();
         //tentativa do comando read
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_veiculo");
+            stmt = con.prepareStatement("SELECT * FROM tb_livros tl JOIN tb_autores ta on tl.id_autor = ta.id_autor");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-
-                Livro c = new Livro();
+                Autor a = new Autor();
+                Livro l = new Livro();
                 
+                a.setId(rs.getInt("ta.id_autor"));
+                a.setNome(rs.getString("ta.nome_autor"));
+                a.setPais(rs.getString("ta.pais_autor"));
+                a.setDataCriacao(rs.getDate("ta.data_criacao").toLocalDate());
                 
-     
 
-                c.setId(rs.getInt("id_livro"));
-                c.setISBN(rs.getString("isbn_livro"));
-                c.setNome(rs.getString("nome_livro"));
-                c.setAutor(rs.getString("autor_livro"));
-                c.setIdioma(rs.getString("idioma_livro"));
-                c.setData_lancamento(rs.getDate("data_lancamento_livro").toLocalDate());
-                c.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
+                l.setId(rs.getInt("tl.id_livro"));
+                l.setISBN(rs.getString("tl.isbn_livro"));
+                l.setNome(rs.getString("tl.nome_livro"));
+                l.setAutor(a);
+                l.setIdioma(rs.getString("tl.idioma_livro"));
+                l.setData_lancamento(rs.getDate("tl.data_lancamento_livro").toLocalDate());
+                l.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
 
-                livros.add(c);
+                livros.add(l);
             }
 
         } //tratamento de exceção 
@@ -113,24 +117,29 @@ public class LivroDAO implements DAO {
         ArrayList<Livro> livros = new ArrayList<>();
         //tentativa do comando readForDesc
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_livros WHERE nome_livro LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tb_livros tl JOIN tb_autores ta ON tl.id_autor = ta.id_autor WHERE nome_livro LIKE ?");
             //objeto(palavra/frase) da pesquisa
             stmt.setString(1, "%" + desc + "%");
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
+                Autor a = new Autor();
+                Livro l = new Livro();
+                
+                a.setId(rs.getInt("ta.id_autor"));
+                a.setNome(rs.getString("ta.nome_autor"));
+                a.setPais(rs.getString("ta.pais_autor"));
+                a.setDataCriacao(rs.getDate("ta.data_criacao").toLocalDate());
 
-                Livro c = new Livro();
-
-                c.setId(rs.getInt("id_livro"));
-                c.setISBN(rs.getString("isbn_livro"));
-                c.setNome(rs.getString("nome_livro"));
-                c.setAutor(rs.getString("autor_livro"));
-                c.setIdioma(rs.getString("idioma_livro"));
-                c.setData_lancamento(rs.getDate("data_lancamento_livro").toLocalDate());
-                c.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
-                livros.add(c);
+                l.setId(rs.getInt("id_livro"));
+                l.setISBN(rs.getString("isbn_livro"));
+                l.setNome(rs.getString("nome_livro"));
+                l.setAutor(a);
+                l.setIdioma(rs.getString("idioma_livro"));
+                l.setData_lancamento(rs.getDate("data_lancamento_livro").toLocalDate());
+                l.setData_criacao(rs.getDate("data_criacao_livro").toLocalDate());
+                livros.add(l);
             }
             //tratamento de exceção
         } catch (SQLException ex) {
@@ -153,17 +162,17 @@ public class LivroDAO implements DAO {
         PreparedStatement stmt = null;
         //tentativa do comando update
         try {
-            Livro c = new Livro();
-            stmt = con.prepareStatement("UPDATE tb_livros SET isbn_livro = ? ,nome_livro = ? ,autor_livro = ? ,"
-                    + "idioma_livro = ? ,data_lancamento_livro = ? ,data_criacao_livro = ? WHERE id_carro = ?");
+            Livro l = (Livro) o;
+            stmt = con.prepareStatement("UPDATE tb_livros SET isbn_livro = ? ,nome_livro = ? ,id_autor = ? ,"
+                    + "idioma_livro = ? ,data_lancamento_livro = ? ,data_criacao_livro = ? WHERE id_livro = ?");
             
-            stmt.setString(1, c.getISBN());
-            stmt.setString(2, c.getNome());
-            stmt.setString(3, c.getAutor());
-            stmt.setString(4, c.getIdioma());
-            stmt.setDate(5, Date.valueOf(c.getData_lancamento()));
+            stmt.setString(1, l.getISBN());
+            stmt.setString(2, l.getNome());
+            stmt.setInt(3, l.getAutor().getId());
+            stmt.setString(4, l.getIdioma());
+            stmt.setDate(5, Date.valueOf(l.getData_lancamento()));
             stmt.setDate(6, Date.valueOf(LocalDate.now()));
-            stmt.setInt(7, c.getId());
+            stmt.setInt(7, l.getId());
 
             stmt.executeUpdate();
 

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -29,6 +30,11 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         initComponents();
         aController = new AutorController(this);
         lController = new LivroController(this);
+        try {
+            lController.getTableLivro();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JTable getTblTabela() {
@@ -74,17 +80,9 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Autor", "Idioma", "Data de Lançamento", "Data de Cadastro"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblTabela);
 
         btCadastrar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
@@ -249,6 +247,9 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     private void cbBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBibliotecaActionPerformed
         if (cbBiblioteca.getSelectedIndex() == 0) {
             try {
+                for (int i = 0; i < 4; i++) {
+                    tblTabela.addColumn(new TableColumn());
+                }
                 lController.getTableLivro();
             } catch (SQLException ex) {
                 Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
