@@ -36,3 +36,33 @@ Teste 5
 *O erro de cadastrar caracteres especiais foi corrigido. Porém, não da para adcionar espaço no nome. Por exemplo: Chico Buarque*
 
 **////////////////////////////////////////////////////////**
+
+Teste 6
+*criação de livros* 
+
+*isbn pode ser cadastrado com menos de 13 numeros, com caracters especiais e espaço*
+
+**////////////////////////////////////////////////////////**
+
+Teste 7
+
+*A interface dos filtros foram alterados*
+
+*Deletar livro e os filtros ainda não estão disponiveis*
+
+**////////////////////////////////////////////////////////**
+
+Teste 8
+
+*não é possivel deletar o autor sem deletar seus livros primeiro*
+
+**////////////////////////////////////////////////////////**
+
+Teste 9
+
+*alterar autor*
+
+*permite por numeros e caracters especiais*
+
+
+**////////////////////////////////////////////////////////**
