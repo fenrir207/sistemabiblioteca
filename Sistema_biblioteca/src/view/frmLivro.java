@@ -152,12 +152,6 @@ public class frmLivro extends javax.swing.JFrame {
         lblDataLancamento.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblDataLancamento.setText("Data de Lançamento:");
 
-        txtDataLancamento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDataLancamentoMouseClicked(evt);
-            }
-        });
-
         btnCadastrar.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {

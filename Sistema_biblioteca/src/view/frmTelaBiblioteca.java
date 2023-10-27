@@ -90,7 +90,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
             },
             new String [] {
-
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
         ));
@@ -166,22 +165,12 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
         buttonGroup1.add(rbNome);
         rbNome.setText("Nome");
-        rbNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbNomeActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rbAutor);
         rbAutor.setText("Autor");
 
         buttonGroup1.add(rbIdioma);
         rbIdioma.setText("Idioma");
-        rbIdioma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbIdiomaActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rbDataLancamento);
         rbDataLancamento.setText("Data de Lançamento");

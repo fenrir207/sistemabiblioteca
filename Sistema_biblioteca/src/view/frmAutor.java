@@ -40,7 +40,6 @@ public class frmAutor extends javax.swing.JFrame {
     public void setLblPais(JLabel lblPais) {
         this.lblPais = lblPais;
     }
-    
 
     AutorController controller;
 
@@ -208,21 +207,17 @@ public class frmAutor extends javax.swing.JFrame {
         if (btCadastrar.getText().equals("Cadastrar")) {
             if (!txtNome.getText().matches("^[a-zA-Z0-9_ ]*$")) {
                 JOptionPane.showMessageDialog(null, "Você só pode escrever letras!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
-            } 
-            else if (txtNome.getText().isEmpty()) {
+            } else if (txtNome.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Você deve escrever algo!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
-            } 
-            else if (txtNome.getText().length() < 3) {
+            } else if (txtNome.getText().length() < 3) {
                 JOptionPane.showMessageDialog(null, "Um nome deve ter pelo menos 3 letras!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (cbPais.getSelectedItem() == null) {
+            } else if (cbPais.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
-            } 
-            else {
+            } else {
                 controller.insert();
             }
         } else {
-            
+
             if (txtNome.getText().matches("^[0-9]+$")) {
                 JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
             } else if (txtNome.getText().isEmpty()) {
@@ -234,6 +229,7 @@ public class frmAutor extends javax.swing.JFrame {
             } else {
                 controller.update();
             }
+        }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
