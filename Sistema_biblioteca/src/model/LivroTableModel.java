@@ -18,12 +18,20 @@ public class LivroTableModel extends AbstractTableModel {
     }
 
     private final String[] colunas = {
-        "Placa", "Modelo", "Cor"
+        "ID", "Nome", "Autor", "ISBN", "Idioma", "Lançamento", "Criação"
     };
     private final ArrayList<Livro> livros;
 
     public LivroTableModel() {
         livros = new ArrayList<>();
+    }
+
+    public ArrayList<Livro> getLivros() {
+        return livros;
+    }
+    
+    public void setRowCount(int index){
+        Livro livro = livros.get(index);
     }
 
     @Override
@@ -41,14 +49,18 @@ public class LivroTableModel extends AbstractTableModel {
         Livro l = livros.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return l.getISBN();
+                return l.getId();
             case 1:
                 return l.getNome();
             case 2:
-                return l.getIdioma();
+                return l.getAutor().getNome();
             case 3:
-                return l.getData_lancamento();
+                return l.getISBN();
             case 4:
+                return l.getIdioma();
+            case 5:
+                return l.getData_lancamento();
+            case 6:
                 return l.getData_criacao();
                 
         }
