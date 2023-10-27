@@ -286,8 +286,8 @@ public class frmLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Autor!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (cbIdiomas.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Idioma!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
-        } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
-            JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        } else if (!txtDataLancamento.getText().matches("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$")) {
+            JOptionPane.showMessageDialog(null, "O formato da data deve ser dd/mm/aaaa", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         }else{
             lc.insert(listaAutor.get(cbAutor.getSelectedIndex()));
         }
