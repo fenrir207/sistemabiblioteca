@@ -204,6 +204,7 @@ public class frmAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+
         if (btCadastrar.getText().equals("Cadastrar")) {
             if (!txtNome.getText().matches("^[a-zA-Z0-9_ ]*$")) {
                 JOptionPane.showMessageDialog(null, "Você só pode escrever letras!!!", "Atenção", JOptionPane.ERROR_MESSAGE);
@@ -221,7 +222,7 @@ public class frmAutor extends javax.swing.JFrame {
                 controller.insert();
             }
         } else {
-            controller.update();
+            
             if (txtNome.getText().matches("^[0-9]+$")) {
                 JOptionPane.showMessageDialog(null, "Você só pode cadastrar letras!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
             } else if (txtNome.getText().isEmpty()) {
@@ -231,10 +232,10 @@ public class frmAutor extends javax.swing.JFrame {
             } else if (cbPais.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Você deve selecionar algum país!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
             } else {
-                controller.insert();
+                controller.update();
             }
     }//GEN-LAST:event_btCadastrarActionPerformed
-    }
+
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
         frmTelaBiblioteca.setLocationRelativeTo(this);

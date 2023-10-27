@@ -13,23 +13,22 @@ import java.util.List;
  * @author Aluno
  */
 public class Livro {
-    
-    
+
     private int id;
     private String isbn;
     private String nome;
-    private String autor;
+    private Autor autor;
     private String idioma;
     private LocalDate data_lancamento;
     private LocalDate data_criacao;
-    
+
     private ArrayList<LivroTableModel> livros;
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
@@ -40,7 +39,7 @@ public class Livro {
     public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -96,8 +95,7 @@ public class Livro {
     public void setLivros(ArrayList<LivroTableModel> livros) {
         this.livros = livros;
     }
-    
-    
+
     public Livro() {
     }
 
@@ -105,7 +103,5 @@ public class Livro {
     public String toString() {
         return "Livro{" + "id=" + id + ", isbn=" + isbn + ", nome=" + nome + ", autor=" + autor + ", idioma=" + idioma + ", data_lancamento=" + data_lancamento + ", data_criacao=" + data_criacao + ", livros=" + livros + '}';
     }
-    
-
 
 }

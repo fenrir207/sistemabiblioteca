@@ -3,6 +3,8 @@ package view;
 import javax.swing.JOptionPane;
 import controller.LivroController;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Autor;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,6 +25,10 @@ import javax.swing.JTextField;
 public class frmLivro extends javax.swing.JFrame {
 
     LivroController lc;
+    ArrayList<Autor> listaAutor;
+    
+    
+
     /**
      * Creates new form frmLivro
      */
@@ -29,13 +36,12 @@ public class frmLivro extends javax.swing.JFrame {
         initComponents();
         lc = new LivroController(this);
         try {
-            lc.ListarAutores();
+            listaAutor = lc.ListarAutores();
         } catch (SQLException ex) {
             Logger.getLogger(frmLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    
     public JButton getBtnCadastrar() {
         return btnCadastrar;
     }
@@ -168,6 +174,8 @@ public class frmLivro extends javax.swing.JFrame {
             }
         });
 
+        cbIdiomas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Português", "Inglês", "Espanhol" }));
+
         lblId.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 14)); // NOI18N
         lblId.setText("ID :");
 
@@ -175,12 +183,6 @@ public class frmLivro extends javax.swing.JFrame {
 
         lblCodigo.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         lblCodigo.setText("Código");
-
-        cbAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAutorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -269,7 +271,7 @@ public class frmLivro extends javax.swing.JFrame {
         frmTelaBiblioteca frmTelaBiblioteca = new frmTelaBiblioteca();
         frmTelaBiblioteca.setLocationRelativeTo(this);
         frmTelaBiblioteca.setVisible(true);
-        this.dispose();
+    this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -292,6 +294,8 @@ public class frmLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Você Deve Selecionar Algum Idioma!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
         } else if (txtDataLancamento.getText().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null, "Você só Pode Cadastrar Números!!!", "Atenção!!!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            lc.insert(listaAutor.get(cbAutor.getSelectedIndex()));
         }
     
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -299,19 +303,10 @@ public class frmLivro extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    private void cbAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAutorActionPerformed
 
-    private void txtDataLancamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDataLancamentoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataLancamentoMouseClicked
 
-/**
- * @param args the command line arguments
- */
 public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -323,27 +318,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLivro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

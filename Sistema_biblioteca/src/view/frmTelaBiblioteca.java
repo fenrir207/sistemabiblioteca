@@ -5,11 +5,14 @@
 package view;
 
 import controller.AutorController;
+import controller.LivroController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -17,7 +20,10 @@ import javax.swing.JTable;
  */
 public class frmTelaBiblioteca extends javax.swing.JFrame {
 
+
+    LivroController lController;
     AutorController aController;
+
 
     /**
      * Creates new form frmTelaBiblioteca
@@ -25,10 +31,20 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     public frmTelaBiblioteca() {
         initComponents();
         aController = new AutorController(this);
+        lController = new LivroController(this);
+        try {
+            lController.getTableLivro();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JTable getTblTabela() {
         return tblTabela;
+    }
+
+    public JTextField getTxtPesquisar() {
+        return txtPesquisar;
     }
 
     /**
@@ -74,17 +90,10 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Código", "Nome", "Autor", "Idioma", "Data de Lançamento", "Data de Cadastro"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
-        });
+        ));
         jScrollPane1.setViewportView(tblTabela);
 
         btCadastrar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
@@ -120,8 +129,8 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         });
 
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPesquisarKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyReleased(evt);
             }
         });
 
@@ -280,10 +289,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarKeyTyped
-
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         frmLivro frmLivro = new frmLivro();
         frmLivro.setLocationRelativeTo(this);
@@ -318,6 +323,14 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             rbIdioma.setVisible(true);
             rbDataLancamento.setVisible(true);
             rbDataCadastro.setVisible(true);
+            try {
+                for (int i = 0; i < 4; i++) {
+                    tblTabela.addColumn(new TableColumn());
+                }
+                lController.getTableLivro();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmTelaBiblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else {
             try {
@@ -353,13 +366,14 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         aController.getDataField();
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void rbNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbNomeActionPerformed
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+        if (cbBiblioteca.getSelectedIndex() == 0) {
 
-    private void rbIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbIdiomaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbIdiomaActionPerformed
+        } else {
+            aController.getData();
+        }
+    }//GEN-LAST:event_txtPesquisarKeyReleased
+  
 
     /**
      * @param args the command line arguments
