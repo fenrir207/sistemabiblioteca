@@ -410,8 +410,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     private javax.swing.JButton btSair;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbBiblioteca;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBiblioteca;
