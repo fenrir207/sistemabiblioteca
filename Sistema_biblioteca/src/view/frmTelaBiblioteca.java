@@ -20,10 +20,8 @@ import javax.swing.table.TableColumn;
  */
 public class frmTelaBiblioteca extends javax.swing.JFrame {
 
-
     LivroController lController;
     AutorController aController;
-
 
     /**
      * Creates new form frmTelaBiblioteca
@@ -69,8 +67,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
         lblBiblioteca = new javax.swing.JLabel();
         cbBiblioteca = new javax.swing.JComboBox<>();
         btExcluir = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         rbId = new javax.swing.JRadioButton();
         rbNome = new javax.swing.JRadioButton();
         rbAutor = new javax.swing.JRadioButton();
@@ -156,10 +152,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "Idioma", "Data de Lançamento", "Data de Cadastro" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "País", " " }));
-
         buttonGroup1.add(rbId);
         rbId.setText("ID");
 
@@ -209,12 +201,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                                 .addComponent(btAlterar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btCadastrar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbBiblioteca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,9 +221,7 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rbCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +285,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void cbBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBibliotecaActionPerformed
-        frmTelaBiblioteca biblioteca = new frmTelaBiblioteca();
 
         if (cbBiblioteca.getSelectedIndex() == 0) {
             rbCodigo.setText("Código");
@@ -351,8 +335,13 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        aController.initViewCadastrarAutor();
-        aController.getDataField();
+        if (cbBiblioteca.getSelectedIndex() == 0) {
+            lController.initViewCadastrar();
+            lController.getDataField();
+        } else {
+            aController.initViewCadastrarAutor();
+            aController.getDataField();
+        }
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
@@ -362,7 +351,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
             aController.getData();
         }
     }//GEN-LAST:event_txtPesquisarKeyReleased
-  
 
     /**
      * @param args the command line arguments
@@ -410,8 +398,6 @@ public class frmTelaBiblioteca extends javax.swing.JFrame {
     private javax.swing.JButton btSair;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbBiblioteca;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBiblioteca;

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Autor;
 import model.AutorTableModel;
@@ -29,11 +30,11 @@ public class LivroController {
     private ArrayList<Autor> listaAutor;
     private DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public LivroController() {
-    }
 
     public LivroController(frmLivro vLivro) {
         this.vLivro = vLivro;
+        System.out.println("BLAH 0001 :"+ vLivro);
+        System.out.println("BLAH :"+ this.vLivro);
         daoLivro = new LivroDAO();
         daoAutor = new AutorDAO();
         try {
@@ -114,8 +115,6 @@ public class LivroController {
     public void getTableLivro() throws SQLException {
         listaLivro = daoLivro.readAll();
         LivroTableModel lModel = new LivroTableModel(listaLivro);
-        
-        System.out.println(listaLivro);
 
         for (int i = 0; i < lModel.getColumnCount(); i++) {
             vBiblioteca.getTblTabela().getColumnModel().getColumn(i).setHeaderValue(lModel.getColumnName(i));
@@ -130,7 +129,6 @@ public class LivroController {
         daoAutor = new AutorDAO();
         listaAutor = daoAutor.readAll();
         for (Autor autor : listaAutor) {
-            System.out.println(autor.getNome());
             vLivro.getCbAutor().addItem(autor.getNome());
         }
 
@@ -156,7 +154,7 @@ public class LivroController {
         }
     }
 
-    public void Update(Autor a) {
+    public void update(Autor a) {
         String codigo = vLivro.getTxtCodigo().getText();
         String nome = vLivro.getTxtNomeLivro().getText();
         String autor = vLivro.getTxtNomeLivro().getText();
@@ -182,6 +180,23 @@ public class LivroController {
             }
         }
     }
+    
+    public void getDataField(){
+        int row = vBiblioteca.getTblTabela().getSelectedRow();
+        System.out.println(listaLivro.get(row));
+        System.out.println("nahhaaaaaa" + vLivro);
+        if(row != -1){
+            vLivro.getTxtId().setText("nhanha");
+//            vLivro.getTxtNomeLivro().setText(listaLivro.get(row).getNome());
+//            vLivro.getTxtCodigo().setText(listaLivro.get(row).getISBN());
+//            vLivro.getCbAutor().setSelectedItem(listaLivro.get(row).getAutor().getNome());
+//            vLivro.getCbIdiomas().setSelectedItem(listaLivro.get(row).getIdioma());
+//            vLivro.getTxtDataLancamento().setText(listaLivro.get(row).getData_lancamento().format(fmt));
+//            
+//            vLivro.getBtnCadastrar().setText("Alterar");
+//            vLivro.getLblTitulo().setText("Alterar livro");
+        }
+    }
 
     public void limparCampos() {
         vLivro.getTxtNomeLivro().setText("");
@@ -190,5 +205,11 @@ public class LivroController {
 
         vLivro.getTxtNomeLivro().requestFocus();
     }
-
-}
+    
+    public void initViewCadastrar(){
+        vLivro = new frmLivro();
+        vLivro.setLocationRelativeTo(null);
+        vLivro.setVisible(true);
+        vBiblioteca.dispose();
+    }
+   }

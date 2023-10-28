@@ -58,7 +58,6 @@ public class AutorController {
     public void update(){
         String nome = vAutor.getTxtNome().getText();
         String pais = vAutor.getCbPais().getSelectedItem().toString();
-        System.out.println(pais);
         String id = vAutor.getTxtId().getText();
         if(verificarCampoVazio(nome, pais) && !id.isEmpty()){
             Autor a = new Autor();
