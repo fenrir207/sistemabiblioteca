@@ -67,3 +67,11 @@ Teste 9
 
 
 **////////////////////////////////////////////////////////**
+
+Teste 10
+
+*alterar e cadastrar autor*
+
+*foi corigido os erros anteriores porem ele aceita quando tu coloca somente espaso*
+
+**////////////////////////////////////////////////////////**
